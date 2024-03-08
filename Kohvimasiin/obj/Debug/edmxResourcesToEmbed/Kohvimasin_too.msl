@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Kohvimasin_tooStoreContainer" CdmEntityContainer="Kohvimasin_tooContainer">
+    <EntitySetMapping Name="KohviautomaatSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Kohvimasin_too.Kohviautomaat)">
+        <MappingFragment StoreEntitySet="KohviautomaatSet">
+          <ScalarProperty Name="kohvi_Id" ColumnName="kohvi_Id" />
+          <ScalarProperty Name="jooginimi" ColumnName="jooginimi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopsejuuaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Kohvimasin_too.Topsejuua)">
+        <MappingFragment StoreEntitySet="TopsejuuaSet">
+          <ScalarProperty Name="topsejuuaId" ColumnName="topsejuuaId" />
+          <ScalarProperty Name="topsejuua" ColumnName="topsejuua" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopsepakisSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Kohvimasin_too.Topsepakis)">
+        <MappingFragment StoreEntitySet="TopsepakisSet">
+          <ScalarProperty Name="topsepakisId" ColumnName="topsepakisId" />
+          <ScalarProperty Name="topsepakis" ColumnName="topsepakis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TopsejuuaKohviautomaat" TypeName="Kohvimasin_too.TopsejuuaKohviautomaat" StoreEntitySet="KohviautomaatSet">
+      <EndProperty Name="Topsejuua">
+        <ScalarProperty Name="topsejuuaId" ColumnName="Topsejuua_topsejuuaId" />
+      </EndProperty>
+      <EndProperty Name="Kohviautomaat">
+        <ScalarProperty Name="kohvi_Id" ColumnName="kohvi_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TopsepakisKohviautomaat" TypeName="Kohvimasin_too.TopsepakisKohviautomaat" StoreEntitySet="KohviautomaatSet">
+      <EndProperty Name="Topsepakis">
+        <ScalarProperty Name="topsepakisId" ColumnName="Topsepakis_topsepakisId" />
+      </EndProperty>
+      <EndProperty Name="Kohviautomaat">
+        <ScalarProperty Name="kohvi_Id" ColumnName="kohvi_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

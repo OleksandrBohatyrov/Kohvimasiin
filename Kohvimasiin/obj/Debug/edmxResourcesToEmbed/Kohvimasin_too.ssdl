@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Kohvimasin_too.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Kohvimasin_tooStoreContainer">
+    <EntitySet Name="KohviautomaatSet" EntityType="Kohvimasin_too.Store.KohviautomaatSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TopsejuuaSet" EntityType="Kohvimasin_too.Store.TopsejuuaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TopsepakisSet" EntityType="Kohvimasin_too.Store.TopsepakisSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TopsejuuaKohviautomaat" Association="Kohvimasin_too.Store.TopsejuuaKohviautomaat">
+      <End Role="Topsejuua" EntitySet="TopsejuuaSet" />
+      <End Role="Kohviautomaat" EntitySet="KohviautomaatSet" />
+    </AssociationSet>
+    <AssociationSet Name="TopsepakisKohviautomaat" Association="Kohvimasin_too.Store.TopsepakisKohviautomaat">
+      <End Role="Topsepakis" EntitySet="TopsepakisSet" />
+      <End Role="Kohviautomaat" EntitySet="KohviautomaatSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="KohviautomaatSet">
+    <Key>
+      <PropertyRef Name="kohvi_Id" />
+    </Key>
+    <Property Name="kohvi_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="jooginimi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Topsejuua_topsejuuaId" Type="int" Nullable="false" />
+    <Property Name="Topsepakis_topsepakisId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TopsejuuaSet">
+    <Key>
+      <PropertyRef Name="topsejuuaId" />
+    </Key>
+    <Property Name="topsejuuaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="topsejuua" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TopsepakisSet">
+    <Key>
+      <PropertyRef Name="topsepakisId" />
+    </Key>
+    <Property Name="topsepakisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="topsepakis" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="TopsejuuaKohviautomaat">
+    <End Role="Topsejuua" Type="Kohvimasin_too.Store.TopsejuuaSet" Multiplicity="1" />
+    <End Role="Kohviautomaat" Type="Kohvimasin_too.Store.KohviautomaatSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topsejuua">
+        <PropertyRef Name="topsejuuaId" />
+      </Principal>
+      <Dependent Role="Kohviautomaat">
+        <PropertyRef Name="Topsejuua_topsejuuaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TopsepakisKohviautomaat">
+    <End Role="Topsepakis" Type="Kohvimasin_too.Store.TopsepakisSet" Multiplicity="1" />
+    <End Role="Kohviautomaat" Type="Kohvimasin_too.Store.KohviautomaatSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Topsepakis">
+        <PropertyRef Name="topsepakisId" />
+      </Principal>
+      <Dependent Role="Kohviautomaat">
+        <PropertyRef Name="Topsepakis_topsepakisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

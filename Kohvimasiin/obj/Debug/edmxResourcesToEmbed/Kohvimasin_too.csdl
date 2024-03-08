@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Kohvimasin_too" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Kohvimasin_tooContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="KohviautomaatSet" EntityType="Kohvimasin_too.Kohviautomaat" />
+    <EntitySet Name="TopsejuuaSet" EntityType="Kohvimasin_too.Topsejuua" />
+    <EntitySet Name="TopsepakisSet" EntityType="Kohvimasin_too.Topsepakis" />
+    <AssociationSet Name="TopsejuuaKohviautomaat" Association="Kohvimasin_too.TopsejuuaKohviautomaat">
+      <End Role="Topsejuua" EntitySet="TopsejuuaSet" />
+      <End Role="Kohviautomaat" EntitySet="KohviautomaatSet" />
+    </AssociationSet>
+    <AssociationSet Name="TopsepakisKohviautomaat" Association="Kohvimasin_too.TopsepakisKohviautomaat">
+      <End Role="Topsepakis" EntitySet="TopsepakisSet" />
+      <End Role="Kohviautomaat" EntitySet="KohviautomaatSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Kohviautomaat">
+    <Key>
+      <PropertyRef Name="kohvi_Id" />
+    </Key>
+    <Property Name="kohvi_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="jooginimi" Type="String" Nullable="false" />
+    <NavigationProperty Name="Topsejuua" Relationship="Kohvimasin_too.TopsejuuaKohviautomaat" FromRole="Kohviautomaat" ToRole="Topsejuua" />
+    <NavigationProperty Name="Topsepakis" Relationship="Kohvimasin_too.TopsepakisKohviautomaat" FromRole="Kohviautomaat" ToRole="Topsepakis" />
+  </EntityType>
+  <EntityType Name="Topsejuua">
+    <Key>
+      <PropertyRef Name="topsejuuaId" />
+    </Key>
+    <Property Name="topsejuuaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="topsejuua" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kohviautomaat" Relationship="Kohvimasin_too.TopsejuuaKohviautomaat" FromRole="Topsejuua" ToRole="Kohviautomaat" />
+  </EntityType>
+  <EntityType Name="Topsepakis">
+    <Key>
+      <PropertyRef Name="topsepakisId" />
+    </Key>
+    <Property Name="topsepakisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="topsepakis" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kohviautomaat" Relationship="Kohvimasin_too.TopsepakisKohviautomaat" FromRole="Topsepakis" ToRole="Kohviautomaat" />
+  </EntityType>
+  <Association Name="TopsejuuaKohviautomaat">
+    <End Type="Kohvimasin_too.Topsejuua" Role="Topsejuua" Multiplicity="1" />
+    <End Type="Kohvimasin_too.Kohviautomaat" Role="Kohviautomaat" Multiplicity="*" />
+  </Association>
+  <Association Name="TopsepakisKohviautomaat">
+    <End Type="Kohvimasin_too.Topsepakis" Role="Topsepakis" Multiplicity="1" />
+    <End Type="Kohvimasin_too.Kohviautomaat" Role="Kohviautomaat" Multiplicity="*" />
+  </Association>
+</Schema>
